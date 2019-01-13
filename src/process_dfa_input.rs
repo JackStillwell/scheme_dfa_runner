@@ -219,3 +219,16 @@ pub fn process_schema(input: String, dfa: String) -> Result<bool, String> {
 
     Ok(false)
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn process_schema_test() {
+        assert_eq!(
+            process_schema("b".to_string(), "(q0 (((q0 b) q1)) (q1))".to_string()),
+            Ok(true)
+        );
+    }
+}
