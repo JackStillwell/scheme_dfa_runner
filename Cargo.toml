@@ -1,0 +1,7 @@
+[package]
+name = "scheme_dfa_runner"
+version = "0.1.0"
+authors = ["jazkworld"]
+edition = "2018"
+
+[dependencies]
