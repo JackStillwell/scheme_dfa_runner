@@ -225,10 +225,42 @@ mod tests {
     use super::*;
 
     #[test]
-    fn process_schema_test() {
+    fn process_schema_test_1() {
         assert_eq!(
             process_schema("b".to_string(), "(q0 (((q0 b) q1)) (q1))".to_string()),
             Ok(true)
+        );
+    }
+
+    #[test]
+    fn process_schema_test_2() {
+        assert_eq!(
+            process_schema("bob".to_string(), "(q0 (((q0 b) q1)) (q1))".to_string()),
+            Ok(true)
+        );
+    }
+
+    #[test]
+    fn process_schema_test_3() {
+        assert_eq!(
+            process_schema(
+                "bob".to_string(),
+                "(q0 (((q0 b) q1) ((q1 o) q2)) (q1))".to_string()
+            ),
+            Ok(false)
+        );
+    }
+
+    /* accept odd num of 0 or even num of 1 but not both */
+    #[test]
+    fn process_schema_test_4() {
+        assert_eq!(
+            process_schema(
+                "00101".to_string(),
+                "(q0q2 (((q0q2 1) q0q3) ((q0q2 0) q1q2) ((q0q3 1) q0q2) ((q0q3 0) q1q3) ((q1q3 0) q0q3) ((q1q3 1) q1q2) ((q1q2 0) q0q2) ((q1q2 1) q1q3)) (q0q2 q1q3))"
+                    .to_string()
+            ),
+            Ok(false)
         );
     }
 }
